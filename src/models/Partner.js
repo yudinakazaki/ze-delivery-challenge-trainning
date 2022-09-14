@@ -31,13 +31,16 @@ const partnerSchema = new mongoose.Schema({
   address: {
     type: {
       type: String,
-      required: true
+      required: true,
+      enum: ['Point']
     },
     coordinates: {
-      type: [String],
+      type: [Number],
       required: true
     }
   }
 })
+
+partnerSchema.index({ address: '2dsphere' })
 
 module.exports = mongoose.model('Partner', partnerSchema)
